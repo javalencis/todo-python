@@ -33,7 +33,9 @@ while(opcion != 0):
                VALUES (?,?,?,?);""", (datos[0], datos[1], datos[2],datos[3]))
         
     elif(opcion == 2):
-        pass
+        res = cur.execute("SELECT * FROM tareas")
+        for a in res:
+            print(a)
         #Imprimir todos los registros
     mensajes()
     opcion = int(input("=>"))
