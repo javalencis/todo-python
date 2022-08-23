@@ -8,7 +8,7 @@ def pedirDatos():
     datos.append(input("Prioridad: "))
     datos.append( input("Estado: "))
     datos.append(input("Fecha estimada(YYYY-MM-DD): "))
-    return (','.join(datos))
+    return datos
 
 def mensajes():
     return print("""
@@ -28,14 +28,17 @@ while(opcion != 0):
     
     if(opcion == 1):
         datos = pedirDatos()
-        cur.execute(f"INSERT INTO tareas VALUES (${datos[0]},${datos[1]}, ${datos[2]},${datos[3]})")
+        #cur.execute(f"INSERT INTO tareas('{datos[0]}','{datos[1]}', '{datos[2]}','{datos[3]}")
+        cur.execute("""INSERT INTO tareas(nombre, prioridad, estado,fechaestimada) 
+               VALUES (?,?,?,?);""", (datos[0], datos[1], datos[2],datos[3]))
+        
     elif(opcion == 2):
         pass
         #Imprimir todos los registros
     mensajes()
     opcion = int(input("=>"))
 print("Gracias por usar nuestro programa")
-
-con.commit()    
+con.commit()  
+  
 con.close()
 
